@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+stash/__init__.py
+stash/__main__.py
+stash/cli.py
+stash.egg-info/PKG-INFO
+stash.egg-info/SOURCES.txt
+stash.egg-info/dependency_links.txt
+stash.egg-info/entry_points.txt
+stash.egg-info/requires.txt
+stash.egg-info/top_level.txt
