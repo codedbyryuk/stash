@@ -2,6 +2,7 @@ import typer
 from rich.console import Console
 from pathlib import Path
 from stash.commands.organize import organize
+from stash.commands.rename import rename
 
 app = typer.Typer(
     help="Stash — remove the boring parts."
@@ -24,3 +25,10 @@ def organize_command( path: Path = typer.Argument(..., help="Directory to organi
     """Scan a directory and preview how files would be organized."""
 
     organize(path)
+
+@app.command("rename")
+def rename_target( path: Path = typer.Argument(..., help="File or folder to rename."),
+                  new_name: str = typer.Argument(..., help="The new name for the file or folder.")):
+    """Rename a file or a folder"""
+
+    rename(path,new_name)
