@@ -3,6 +3,7 @@ from rich.console import Console
 from pathlib import Path
 from stash.commands.organize import organize
 from stash.commands.rename import rename
+from stash.commands.duplicates import duplicates
 
 app = typer.Typer(
     help="Stash — remove the boring parts."
@@ -32,3 +33,9 @@ def rename_target( path: Path = typer.Argument(..., help="File or folder to rena
     """Rename a file or a folder"""
 
     rename(path,new_name)
+
+@app.command("duplicates")
+def duplicate_command(path:Path = typer.Argument(...,help="Directory to scan for duplicate files.")):
+    """Find duplicate files inside a directory"""
+
+    duplicates(Path(path))
