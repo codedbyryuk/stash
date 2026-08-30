@@ -9,3 +9,5 @@ stash.egg-info/dependency_links.txt
 stash.egg-info/entry_points.txt
 stash.egg-info/requires.txt
 stash.egg-info/top_level.txt
+stash/commands/__init__.py
+stash/commands/organize.py
