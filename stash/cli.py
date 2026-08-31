@@ -4,6 +4,7 @@ from pathlib import Path
 from stash.commands.organize import organize
 from stash.commands.rename import rename
 from stash.commands.duplicates import duplicates
+from stash.commands.compressor import compress
 
 app = typer.Typer(
     help="Stash — remove the boring parts."
@@ -39,3 +40,30 @@ def duplicate_command(path:Path = typer.Argument(...,help="Directory to scan for
     """Find duplicate files inside a directory"""
 
     duplicates(Path(path))
+    
+@app.command("compress")
+def compress_command(
+    path:Path=typer.Argument(...,help="Directory or file to compress."),
+    output: str= typer.Option(
+        None,
+        "--output",
+        "-o",
+        help="output zip filename."
+    )):
+    """Compress a file or a directory into a ZIP archive."""
+    
+    source = Path(path)
+    
+    if not source.exists():
+        console.print(
+            f"[bold red]✗[/bold red] "
+            f"Path does not exist: {source}"
+        )
+        raise typer.Exit(code=1)
+    
+    if output:
+        output_path = Path(output)
+    else:
+        output_path = Path(f"{source.name}.zip")
+    
+    compress(source,output_path)
