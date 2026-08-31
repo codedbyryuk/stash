@@ -5,6 +5,7 @@ from stash.commands.organize import organize
 from stash.commands.rename import rename
 from stash.commands.duplicates import duplicates
 from stash.commands.compressor import compress
+from stash.commands.find import find
 
 app = typer.Typer(
     help="Stash — remove the boring parts."
@@ -67,3 +68,16 @@ def compress_command(
         output_path = Path(f"{source.name}.zip")
     
     compress(source,output_path)
+    
+@app.command("find")
+def find_command(
+    path:Path=typer.Argument(...,help="Directory or file to search"),
+    name: str | None = typer.Option(
+        None,
+        "--name",
+        "-n",
+        help="Filter files by name pattern."
+    )):
+    """Find files recursively."""
+    
+    find(Path(path),name)

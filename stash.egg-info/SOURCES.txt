@@ -12,5 +12,6 @@ stash.egg-info/top_level.txt
 stash/commands/__init__.py
 stash/commands/compressor.py
 stash/commands/duplicates.py
+stash/commands/find.py
 stash/commands/organize.py
 stash/commands/rename.py
