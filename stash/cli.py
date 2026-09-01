@@ -77,7 +77,13 @@ def find_command(
         "--name",
         "-n",
         help="Filter files by name pattern."
+    ),
+    file_type: str | None = typer.Option(
+        None,
+        "--type",
+        "-t",
+        help="Filter by file type."
     )):
     """Find files recursively."""
     
-    find(Path(path),name)
+    find(Path(path),name,file_type)
