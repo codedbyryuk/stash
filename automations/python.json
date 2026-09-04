@@ -1,0 +1,16 @@
+{
+    "name": "python",
+    "folders": [
+        "src",
+        "tests"
+    ],
+    "files": [
+        "src/main.py",
+        "tests/test_main.py",
+        "README.md"
+    ],
+    "commands": [
+        "echo hellooooo"
+    ],
+    "apps": []
+}
