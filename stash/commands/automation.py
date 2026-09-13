@@ -1,19 +1,7 @@
-from pathlib import Path
+import typer
 
-from stash.automation.manager import load_automation
-from stash.automation.runner import create_folders,create_files,run_commands
+app = typer.Typer()
 
-automation = load_automation(Path("automations/python.json"))
-
-project = Path("test-projects")
-
-create_folders(
-    project,
-    automation["folders"]
-)
-create_files(
-    project,
-    automation["files"]
-)
-
-run_commands(automation["commands"])
+@app.command()
+def run(name:str,project:str):
+    print(f"Running automation '{name}' for project '{project}'")

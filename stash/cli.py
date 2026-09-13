@@ -6,6 +6,7 @@ from stash.commands.rename import rename
 from stash.commands.duplicates import duplicates
 from stash.commands.compressor import compress
 from stash.commands.find import find
+from stash.commands import automation
 
 app = typer.Typer(
     help="Stash — remove the boring parts."
@@ -87,3 +88,8 @@ def find_command(
     """Find files recursively."""
     
     find(Path(path),name,file_type)
+    
+app.add_typer(
+    automation.app,
+    name="automation"
+)

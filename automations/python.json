@@ -10,7 +10,7 @@
         "README.md"
     ],
     "commands": [
-        "echo hellooooo"
+        "python -m venv .venv"
     ],
     "apps": []
 }

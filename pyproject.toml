@@ -11,3 +11,6 @@ dependencies = [
 
 [project.scripts]
 stash = "stash.cli:app"
+
+[tool.setuptools.packages.find]
+include = ["stash*"]
