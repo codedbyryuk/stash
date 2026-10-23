@@ -1,2 +1,0 @@
-[console_scripts]
-stash = stash.cli:app

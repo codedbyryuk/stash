@@ -2,7 +2,21 @@
 
 **Stash** is a Python CLI tool designed to eliminate boring and repetitive tasks. From organizing directories and finding duplicate files to automating project setups and managing your projects, Stash helps streamline your development workflow.
 
-Stash is built with Python.
+Stash is built with Python and is available on PyPI.
+
+## Installation
+
+Install Stash using pip:
+
+```bash
+pip install stashkit
+```
+
+Verify the installation:
+
+```bash
+stash --help
+```
 
 ## Available Features
 
@@ -149,7 +163,7 @@ stash unregister my-project
 
 Unregistering removes the project from Stash's registry without deleting its files.
 
-## Tech
+## Tech Stack
 
 - Python
 - Typer — CLI commands and arguments
@@ -164,3 +178,7 @@ Unregistering removes the project from Stash's registry without deleting its fil
 ## Note
 
 Stash is actively being developed. Features and commands may change in future releases.
+
+## Links
+
+- [PyPI Package](https://pypi.org/project/stashkit/)
