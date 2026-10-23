@@ -1,3 +1,4 @@
+
 [project]
 name = "stash"
 version = "0.1.0"
@@ -14,3 +15,6 @@ stash = "stash.cli:app"
 
 [tool.setuptools.packages.find]
 include = ["stash*"]
+
+[tool.setuptools.package-data]
+stash = ["automations/*.json"]

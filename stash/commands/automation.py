@@ -18,9 +18,40 @@ def load_automation_safely(path: Path) -> dict:
         raise typer.Exit(code=1)
 
 
-AUTOMATIONS_DIR = (
-    Path(__file__).resolve().parents[2] / "automations"
+BUILTIN_AUTOMATIONS_DIR = (
+    Path(__file__).resolve().parents[1] / "automations"
 )
+
+USER_AUTOMATIONS_DIR = (
+    Path.home() / ".stash" / "automations"
+)
+
+USER_AUTOMATIONS_DIR.mkdir(parents=True, exist_ok=True)
+
+AUTOMATIONS_DIR = USER_AUTOMATIONS_DIR
+
+def get_automation_file(name: str) -> Path:
+    user_file = USER_AUTOMATIONS_DIR / f"{name}.json"
+    builtin_file = BUILTIN_AUTOMATIONS_DIR / f"{name}.json"
+
+    if user_file.exists():
+        return user_file
+
+    return builtin_file
+
+
+def get_all_automation_files() -> list[Path]:
+    files = {
+        file.stem: file
+        for file in BUILTIN_AUTOMATIONS_DIR.glob("*.json")
+    }
+
+    files.update({
+        file.stem: file
+        for file in USER_AUTOMATIONS_DIR.glob("*.json")
+    })
+
+    return sorted(files.values())
 
 
 @app.command()
@@ -34,12 +65,11 @@ def run(
         help="Skip confirmation.",
     ),
 ):
-    automation_file = AUTOMATIONS_DIR / f"{name}.json"
+    automation_file = get_automation_file(name)
 
     if not automation_file.exists():
         console.print(
-            f"[bold red]✗[/bold red] "
-            f"Automation '{name}' not found."
+            f"[bold red]Automation '{name}' not found.[/bold red]"
         )
         raise typer.Exit(code=1)
 
@@ -97,9 +127,7 @@ def run(
     
 @app.command("list")
 def list_automations():
-    automation_files = sorted(
-        AUTOMATIONS_DIR.glob("*.json")
-    )
+    automation_files = get_all_automation_files()
     if not automation_files:
         console.print("[yellow]No automations found.[/yellow]")
         return
@@ -125,9 +153,9 @@ def create_automation():
     name = typer.prompt("Automation name")
     description = typer.prompt("Description")
 
-    automation_file = AUTOMATIONS_DIR / f"{name}.json"
+    automation_file = USER_AUTOMATIONS_DIR / f"{name}.json"
 
-    if automation_file.exists():
+    if get_automation_file(name).exists():
         console.print(
             f"[bold red]✗[/bold red] "
             f"Automation '{name}' already exists."
@@ -212,7 +240,7 @@ def create_automation():
 
 @app.command("show")
 def show_automation(name: str):
-    automation_file = AUTOMATIONS_DIR / f"{name}.json"
+    automation_file = get_automation_file(name)
 
     if not automation_file.exists():
         console.print(
@@ -252,14 +280,22 @@ def show_automation(name: str):
 
 @app.command("delete")
 def delete_automation(name: str):
-    automation_file = AUTOMATIONS_DIR / f"{name}.json"
+    automation_file = USER_AUTOMATIONS_DIR / f"{name}.json"
 
     if not automation_file.exists():
-        console.print(
-            f"[bold red]✗[/bold red] "
-            f"Automation '{name}' not found."
-        )
-        raise typer.Exit(code=1)
+            builtin_file = BUILTIN_AUTOMATIONS_DIR / f"{name}.json"
+    
+            if builtin_file.exists():
+                console.print(
+                    "[yellow]This is a built-in automation. "
+                    "Create a custom copy before editing it.[/yellow]"
+                )
+            else:
+                console.print(
+                    f"[bold red]Automation '{name}' not found.[/bold red]"
+                )
+    
+            raise typer.Exit(code=1)
 
     confirmed = typer.confirm(
         f"Are you sure you want to delete '{name}'?"
@@ -280,13 +316,21 @@ def delete_automation(name: str):
 
 @app.command("edit")
 def edit_automation(name: str):
-    automation_file = AUTOMATIONS_DIR / f"{name}.json"
+    automation_file = USER_AUTOMATIONS_DIR / f"{name}.json"
 
     if not automation_file.exists():
-        console.print(
-            f"[bold red]✗[/bold red] "
-            f"Automation '{name}' not found."
-        )
+        builtin_file = BUILTIN_AUTOMATIONS_DIR / f"{name}.json"
+
+        if builtin_file.exists():
+            console.print(
+                "[yellow]This is a built-in automation. "
+                "Create a custom copy before editing it.[/yellow]"
+            )
+        else:
+            console.print(
+                f"[bold red]Automation '{name}' not found.[/bold red]"
+            )
+
         raise typer.Exit(code=1)
 
     automation = load_automation_safely(automation_file)
