@@ -163,4 +163,4 @@ Unregistering removes the project from Stash's registry without deleting its fil
 
 ## Note
 
-**Stash is still in development.** Features and commands may change as development continues.
+Stash is actively being developed. Features and commands may change in future releases.
