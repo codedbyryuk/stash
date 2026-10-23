@@ -7,10 +7,15 @@ from stash.commands.duplicates import duplicates
 from stash.commands.compressor import compress
 from stash.commands.find import find
 from stash.commands import automation
+from stash.commands import projects
 
 app = typer.Typer(
     help="Stash — remove the boring parts."
 )
+
+
+
+
 
 console = Console()
 
@@ -91,5 +96,7 @@ def find_command(
     
 app.add_typer(
     automation.app,
-    name="automation"
+    name="automation",
+    help="Create projects and manage reusable automation templates."
 )
+app.add_typer(projects.app)

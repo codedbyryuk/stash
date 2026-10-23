@@ -1,5 +1,6 @@
 {
     "name": "python",
+    "description": "Python project setup",
     "folders": [
         "src",
         "tests"
@@ -10,7 +11,8 @@
         "README.md"
     ],
     "commands": [
-        "python -m venv .venv"
+        "python -m venv .venv",
+        "dir"
     ],
     "apps": []
 }

@@ -1,0 +1,20 @@
+{
+    "name": "python-game",
+    "description": "newer python game setup",
+    "folders": [
+        "newScripts",
+        "newAssets",
+        "newScenes"
+    ],
+    "files": [
+        "newScripts/newMain.py",
+        "NEWREADME.md"
+    ],
+    "commands": [
+        "python -m venv .venv",
+        "dir"
+    ],
+    "apps": [
+        "code ."
+    ]
+}

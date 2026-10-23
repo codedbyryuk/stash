@@ -16,10 +16,26 @@ def create_files(base_path:Path,files: list[str]):
         
         path.touch()
         
-def run_commands(base_path:Path,commands: list[str]):
+
+def run_commands(base_path: Path, commands: list[str]):
     for command in commands:
-        subprocess.run(command,shell=True, cwd=base_path)
-        
+        print(f"Running: {command}")
+
+        result = subprocess.run(
+            command,
+            shell=True,
+            cwd=base_path
+        )
+
+        if result.returncode != 0:
+            print(
+                f"Command failed with exit code "
+                f"{result.returncode}: {command}"
+            )
+            raise RuntimeError(
+                f"Automation stopped because a command failed."
+            )
+
 def open_apps(base_path:Path,apps:list[str]):
     for app in apps:
         subprocess.Popen(

@@ -1,8 +1,8 @@
 # About Stash
 
-**Stash** is a CLI tool which allows user to eliminate boring and repetitive tasks. From organizing directories to automating project setups, **Stash** can be used.
+**Stash** is a Python CLI tool designed to eliminate boring and repetitive tasks. From organizing directories and finding duplicate files to automating project setups and managing your projects, Stash helps streamline your development workflow.
 
-**Stash** is made with purely using python.
+Stash is built with Python.
 
 ## Available Features
 
@@ -46,27 +46,121 @@ stash compress directory_name -o new_name
 
 ### `find`
 
-Finds a specific file by name.
+Finds files recursively by name or category.
+
+Search by name:
 
 ```bash
 stash find -n "file_name.txt"
 ```
 
-You can also search for files by category, such as images, videos, or audio:
+Search by category, such as images, videos, or audio:
 
 ```bash
 stash find -t image
 ```
 
+### `automation`
+
+Create, manage, and run reusable automation templates for project setup.
+
+List available automations:
+
+```bash
+stash automation list
+```
+
+View an automation's details:
+
+```bash
+stash automation show python
+```
+
+Create a new automation:
+
+```bash
+stash automation create
+```
+
+Edit or delete an automation:
+
+```bash
+stash automation edit python
+stash automation delete python
+```
+
+Run an automation to create a project:
+
+```bash
+stash automation run python my-project
+```
+
+Skip the confirmation prompt:
+
+```bash
+stash automation run python my-project --yes
+```
+
+Automations can create folders and files, execute commands, and open applications.
+
+### Project Management
+
+Stash can keep track of your projects, including projects created through its automation system.
+
+**Register an existing project:**
+
+```bash
+stash register my-project "C:\path\to\project"
+```
+
+**List registered projects:**
+
+```bash
+stash projects
+```
+
+The project list displays registered paths and whether their directories are available.
+
+**View project details:**
+
+```bash
+stash info my-project
+```
+
+Displays the project's path, availability, and the number of files and folders in its root directory.
+
+**Open a project in VS Code:**
+
+```bash
+stash open my-project
+```
+
+**Open a project in File Explorer:**
+
+```bash
+stash open my-project --explorer
+```
+
+**Unregister a project:**
+
+```bash
+stash unregister my-project
+```
+
+Unregistering removes the project from Stash's registry without deleting its files.
+
 ## Tech
 
-- typer
-- rich
-- shutil
-- pathlib
-- hashlib
-- zipfile
+- Python
+- Typer — CLI commands and arguments
+- Rich — terminal output and tables
+- pathlib — filesystem paths
+- shutil — file operations
+- hashlib — file hashing
+- zipfile — archive creation
+- subprocess — executing commands and opening applications
+- JSON — storing automation templates and the project registry
 
 ## Note
 
-**Stash** is still in development so there are only few commands.
+**Stash is still in development.** Features and commands may change as development continues.
