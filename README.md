@@ -1,3 +1,4 @@
+[![PyPI Downloads](https://static.pepy.tech/personalized-badge/stashkit?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=GREEN&left_text=downloads)](https://pepy.tech/projects/stashkit)
 # About Stash
 
 **Stash** is a Python CLI tool designed to eliminate boring and repetitive tasks. From organizing directories and finding duplicate files to automating project setups and managing your projects, Stash helps streamline your development workflow.
